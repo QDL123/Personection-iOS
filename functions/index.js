@@ -8,6 +8,7 @@ const functions = require('firebase-functions');
 //Required Packages (Files in the directories containing needed code)
 const newUserModule = require('./newUser');
 const deleteUserModule = require('./deleteUser');
+const makePlansModule = require('./makePlans');
 
 //Functions Declarations
 exports.newUser = functions.firestore.document('users/{userID}')
@@ -15,6 +16,11 @@ exports.newUser = functions.firestore.document('users/{userID}')
 
 exports.deleteUser = functions.firestore.document('users/{userID}')
 .onDelete(deleteUserModule.handler);
+
+exports.makePlans = functions.firestore.document('users/{userID}/requests/{requestID}')
+.onCreate(makePlansModule.handler);
+
+
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
 //

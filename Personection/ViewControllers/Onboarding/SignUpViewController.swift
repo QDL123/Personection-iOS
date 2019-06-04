@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseFirestore
 
 class SignUpViewController: UIViewController, UITextFieldDelegate {
 
@@ -36,6 +37,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     //Mark: Button Actions
     @IBAction func signUpPushed(_ sender: Any) {
+        print("Sign Up PRessed!")
         //Check to make sure that every textField has been filled
         if(firstNameTextField.hasText && lastNameTextField.hasText && emailTextField.hasText && passwordTextField.hasText && confirmPasswordTextField.hasText) {
             //Check to see if password matches confirm password
@@ -51,19 +53,33 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                 guard let firstName = firstNameTextField.text else {return}
                 guard let lastName = lastNameTextField.text else {return}
                 
-                Auth.auth().createUser(withEmail: email, password: password, completion: {(authResult, error) in
+                Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
+                    
+                    if authResult == nil {
+                        print("IT'S NIL")
+                    }
+                    guard let authResult = authResult else {
+                        print("Could not get user from authResult")
+                        return
+                    }
+                    
+                    let uid = authResult.user.uid
                     
                     let db = Firestore.firestore()
-                    var ref: DocumentReference? = nil
-                    ref = db.collection("users").addDocument(data: [
+                    db.collection("users").document(uid).setData([
                         "firstName": firstName,
                         "lastName": lastName,
-                        "email": email,
+                        "email": email
                     ]) { err in
                         if let err = err {
                             print("Error adding document: \(err)")
                         } else {
-                            print("Document added with ID: \(ref!.documentID)")
+                            print("Document added with ID: \(uid)")
+                            if(CurrentUser.constructed) {
+                                CurrentUser.currentUser.updateUser()
+                            }
+                            //This serves the functional purpose of forcing current user class to update.
+                            print("User: " + CurrentUser.currentUser.getFirstName())
                         }
                     }
                     
@@ -71,7 +87,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                         print(error)
                     }
                     self.performSegue(withIdentifier: "signUp", sender: self)
-                })
+                }
  
             } else {
                 let alertController = UIAlertController(title: "Passwords Don't Match", message: "Make sure that that your password matches what's in the confirm password input field.", preferredStyle: .alert)

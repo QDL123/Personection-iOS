@@ -21,7 +21,7 @@ class OrientationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+        themeColor = view.backgroundColor
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -37,6 +37,12 @@ class OrientationViewController: UIViewController {
             } else {
                 print("SHOULD GO TO HOME")
                 //Load initial data and then segue to home.
+                print("CURRENT USER: " + Auth.auth().currentUser!.uid)
+                if(CurrentUser.constructed) {
+                    CurrentUser.currentUser.updateUser()
+                }
+                print("Name: " + CurrentUser.currentUser.getFirstName())
+                print("Above is likely nil since the completion block hasn't finished.")
                 performSegue(withIdentifier: "toHome", sender: self)
             }
         } else if (sender == 1) {

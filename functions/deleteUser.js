@@ -13,7 +13,6 @@ const ALGOLIA_SEARCH_KEY = "54efdbade3ca6966c12b855166f6bbde";
 const ALGOLIA_INDEX_NAME = 'users_search';
 var client = algoliasearch(ALGOLIA_ID, ALGOLIA_ADMIN_KEY);
 
-
 exports.handler = ((snap, context) => {
   //Get the user document
   // Write to the algolia index

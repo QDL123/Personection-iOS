@@ -10,15 +10,14 @@
     "logs": "firebase functions:log"
   },
   "dependencies": {
-    "ajv": "^6.6.2",
     "algoliasearch": "^3.32.0",
-    "firebase-admin": "~6.0.0",
+    "firebase-admin": "^6.5.1",
     "firebase-functions": "^2.1.0"
   },
   "devDependencies": {
+    "ajv": "^5.5.2",
     "eslint": "^4.12.0",
-    "eslint-plugin-promise": "^3.6.0",
-    "ajv": "5.0.0"
+    "eslint-plugin-promise": "^3.6.0"
   },
   "private": true
 }

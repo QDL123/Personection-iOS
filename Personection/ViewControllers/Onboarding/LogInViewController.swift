@@ -46,7 +46,18 @@ class LogInViewController: UIViewController, UITextFieldDelegate  {
             guard let email = emailTextField.text else {return}
             guard let password = passwordTextField.text else {return}
             Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
-                self.performSegue(withIdentifier: "logIn", sender: self)
+                
+                if let error = error {
+                    print("ERROR: Failed top sign in user.")
+                    print(error)
+                } else {
+                    //Force CurrentUser to update.
+                    if(CurrentUser.constructed) {
+                        CurrentUser.currentUser.updateUser()
+                    }
+                    print("User: " + CurrentUser.currentUser.getFirstName())
+                    self.performSegue(withIdentifier: "logIn", sender: self)
+                }
             })
             
         } else {

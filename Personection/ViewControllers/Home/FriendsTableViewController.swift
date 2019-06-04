@@ -43,11 +43,6 @@ class FriendsTableViewController: HitsTableViewController {
             cell.textLabel?.text = "Error getting user's last name"
             return cell
         }
-        guard let email = hit["email"] as? String else {
-            print("Error getting user's email")
-            cell.textLabel?.text = "Error getting user's email"
-            return cell
-        }
         
         guard let id = hit["objectID"] as? String else {
             print("Error getting user id")
@@ -55,7 +50,7 @@ class FriendsTableViewController: HitsTableViewController {
             return cell
         }
         
-        let user = User(firstName: firstName, lastName: lastName, email: email, id: id)
+        let user = User(firstName: firstName, lastName: lastName, id: id)
         self.users.append(user)
         cell.textLabel?.text = firstName + " " + lastName
         return cell
