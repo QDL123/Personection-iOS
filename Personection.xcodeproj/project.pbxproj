@@ -105,12 +105,12 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		5C04AA0521B0E68100B29EEF /* Helper Classes */ = {
+		5C04AA0521B0E68100B29EEF /* HelperClasses */ = {
 			isa = PBXGroup;
 			children = (
 				5C9C996F21F29D1700CB0FED /* CurrentUser.swift */,
 			);
-			path = "Helper Classes";
+			path = HelperClasses;
 			sourceTree = "<group>";
 		};
 		5C4AA3D621ABA3FC00A1AC6C = {
@@ -136,7 +136,7 @@
 			children = (
 				5CFFDEE922A62D840093F754 /* Utilities */,
 				5C5E62B721C8AC5B00C70054 /* Storyboards */,
-				5C04AA0521B0E68100B29EEF /* Helper Classes */,
+				5C04AA0521B0E68100B29EEF /* HelperClasses */,
 				5CA876E321E50D7500229CAB /* Data Structures */,
 				5C4AA3F821ABBEFD00A1AC6C /* ViewControllers */,
 				5C4AA3E221ABA3FC00A1AC6C /* AppDelegate.swift */,

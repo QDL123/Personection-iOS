@@ -10,7 +10,7 @@ import Firebase
 import FirebaseFirestore
 
 class CurrentUser: User {
-    
+
     static var currentUser = CurrentUser()
     static var constructed = false
     
