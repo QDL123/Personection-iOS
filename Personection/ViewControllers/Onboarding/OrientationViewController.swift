@@ -15,6 +15,8 @@ class OrientationViewController: UIViewController {
     //Mark: IBOutlet Connections
     @IBOutlet weak var activityIndicator: NVActivityIndicatorView!
     
+    
+    //IDEA: Use enum to track what is being loaded.
     //class level variables
     let sender: Int = 0
     
@@ -37,11 +39,10 @@ class OrientationViewController: UIViewController {
             } else {
                 print("SHOULD GO TO HOME")
                 //Load initial data and then segue to home.
+                //USE Promises here to download the data on all homescreens and then segue.
                 print("CURRENT USER: " + Auth.auth().currentUser!.uid)
-                if(CurrentUser.constructed) {
-                    CurrentUser.currentUser.updateUser()
-                }
-                print("Name: " + CurrentUser.currentUser.getFirstName())
+                CurrentUser.getCurrentUser().updateUser()
+                print("Name: " + CurrentUser.getCurrentUser().getFirstName())
                 print("Above is likely nil since the completion block hasn't finished.")
                 performSegue(withIdentifier: "toHome", sender: self)
             }

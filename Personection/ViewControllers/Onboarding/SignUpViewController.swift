@@ -37,7 +37,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     //Mark: Button Actions
     @IBAction func signUpPushed(_ sender: Any) {
-        print("Sign Up PRessed!")
         //Check to make sure that every textField has been filled
         if(firstNameTextField.hasText && lastNameTextField.hasText && emailTextField.hasText && passwordTextField.hasText && confirmPasswordTextField.hasText) {
             //Check to see if password matches confirm password
@@ -53,39 +52,44 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                 guard let firstName = firstNameTextField.text else {return}
                 guard let lastName = lastNameTextField.text else {return}
                 
+                //Register the user in the authentication system
                 Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
                     
-                    if authResult == nil {
-                        print("IT'S NIL")
-                    }
-                    guard let authResult = authResult else {
-                        print("Could not get user from authResult")
-                        return
+                    //Check for an error registering the user in the auth system
+                    if let error = error {
+                        //Log the error
+                        return Log.e(eventType: LogEvent.authentication, message: error.localizedDescription)
                     }
                     
+                    //Check if the authResult was successfully generated
+                    guard let authResult = authResult else {
+                        return Log.e(eventType: LogEvent.authentication, message: "AuthResult is nil after attempted sign up.")
+                    }
+                    
+                    //Get the newly created id
                     let uid = authResult.user.uid
                     
+                    //Upload the user information in the database
                     let db = Firestore.firestore()
                     db.collection("users").document(uid).setData([
                         "firstName": firstName,
                         "lastName": lastName,
                         "email": email
                     ]) { err in
+                        
+                        //Check for error uploading user data
                         if let err = err {
-                            print("Error adding document: \(err)")
-                        } else {
-                            print("Document added with ID: \(uid)")
-                            if(CurrentUser.constructed) {
-                                CurrentUser.currentUser.updateUser()
-                            }
-                            //This serves the functional purpose of forcing current user class to update.
-                            print("User: " + CurrentUser.currentUser.getFirstName())
+                            //Log the error
+                            return Log.e(eventType: LogEvent.authentication, message: err.localizedDescription)
                         }
+                        
+                        //Log that the user was uploaded
+                        Log.i(message: "Document added with ID: \(uid)")
+                        //Log in to the CurrentUser system
+                        CurrentUser.login()
                     }
                     
-                    if let error = error {
-                        print(error)
-                    }
+                    //Segue away from the sign up screen.
                     self.performSegue(withIdentifier: "signUp", sender: self)
                 }
  

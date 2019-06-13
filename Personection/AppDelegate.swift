@@ -25,7 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         InstantSearch.shared.configure(appID: "DMRC05KK1I", apiKey: "54efdbade3ca6966c12b855166f6bbde", index: "users_search")
         InstantSearch.shared.params.attributesToRetrieve = ["firstName", "lastName"]
         InstantSearch.shared.params.attributesToHighlight = ["firstName"]
-
+        
+        //Mark: Crashlytics set up
+        Fabric.sharedSDK().debug = true
+        
         
         return true
     }

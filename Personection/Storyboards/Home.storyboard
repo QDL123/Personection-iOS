@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3m2-Ga-viD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3m2-Ga-viD">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -198,54 +198,6 @@
             </objects>
             <point key="canvasLocation" x="277.60000000000002" y="-379.16041979010498"/>
         </scene>
-        <!--Friends Table View Controller-->
-        <scene sceneID="Jz6-3R-lQC">
-            <objects>
-                <tableViewController id="uqa-wR-eva" customClass="FriendsTableViewController" customModule="Personection" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="FgV-Q8-9EG" customClass="HitsTableWidget" customModule="InstantSearch">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="mbn-1I-m4V" customClass="SearchBarWidget" customModule="InstantSearch">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
-                        </searchBar>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="hitCell" id="gOH-uF-Ihy">
-                                <rect key="frame" x="0.0" y="72" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gOH-uF-Ihy" id="xEz-a5-Xit">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="uqa-wR-eva" id="DYs-fb-D5S"/>
-                            <outlet property="delegate" destination="uqa-wR-eva" id="3RD-PM-3cL"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="w1X-0C-hUN">
-                        <nil key="title"/>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="searchDisplayController" destination="yoO-FC-DsY" id="kH1-Dh-iBP"/>
-                        <outlet property="tableView" destination="FgV-Q8-9EG" id="REV-P7-Hyv"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Hwz-9w-Jkm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="yoO-FC-DsY">
-                    <connections>
-                        <outlet property="delegate" destination="uqa-wR-eva" id="fGC-oy-qFK"/>
-                        <outlet property="searchContentsController" destination="uqa-wR-eva" id="hZs-lD-w0F"/>
-                        <outlet property="searchResultsDataSource" destination="uqa-wR-eva" id="XZ3-YJ-wrT"/>
-                        <outlet property="searchResultsDelegate" destination="uqa-wR-eva" id="WL0-zX-yFB"/>
-                    </connections>
-                </searchDisplayController>
-            </objects>
-            <point key="canvasLocation" x="1230" y="-1066"/>
-        </scene>
         <!--User Search-->
         <scene sceneID="f3Q-Gp-rNp">
             <objects>
@@ -274,7 +226,7 @@
                                 <rect key="frame" x="0.0" y="155" width="375" height="463"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="hitCell" id="Rj7-NP-93y">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="hitCell" id="Rj7-NP-93y" customClass="HitCell" customModule="Personection" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Rj7-NP-93y" id="gDx-i4-UeB">
@@ -282,7 +234,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="5on-dZ-B10" kind="show" id="Eg7-7O-835"/>
+                                            <segue destination="5on-dZ-B10" kind="show" identifier="toUserDetail" id="Eg7-7O-835"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -305,6 +257,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="User Search" id="vKY-py-gR8"/>
                     <connections>
+                        <outlet property="searchBarWidget" destination="lKm-9Q-eB7" id="q0N-1k-PMv"/>
                         <outlet property="tableView" destination="wDC-YW-ZJV" id="nHk-74-NXS"/>
                     </connections>
                 </viewController>
@@ -519,12 +472,44 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="ALc-jp-E7X" kind="relationship" relationship="rootViewController" id="V8D-1J-4Ok"/>
+                        <segue destination="ALc-jp-E7X" kind="relationship" relationship="rootViewController" id="v37-2l-q5E"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1fM-b4-BIO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="278" y="-1064"/>
+        </scene>
+        <!--User Search Controller-->
+        <scene sceneID="NQu-WF-I3z">
+            <objects>
+                <tableViewController id="jfO-hi-je6" customClass="UserSearchController" customModule="Personection" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="lu2-03-tiR">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" id="YDf-T2-9eR">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YDf-T2-9eR" id="U2M-oo-Nqr">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="5on-dZ-B10" kind="show" id="xL5-1F-ms4"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="jfO-hi-je6" id="QoQ-O4-UdE"/>
+                            <outlet property="delegate" destination="jfO-hi-je6" id="HCR-PN-9IO"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="IES-k5-dhF"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yEm-Cv-5P6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1111" y="-1746"/>
         </scene>
         <!--Friend Requests-->
         <scene sceneID="vpX-IC-y66">

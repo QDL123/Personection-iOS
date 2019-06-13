@@ -5,6 +5,11 @@ PODS:
   - BoringSSL/Implementation (10.0.6):
     - BoringSSL/Interface (= 10.0.6)
   - BoringSSL/Interface (10.0.6)
+  - Crashlytics (3.13.1):
+    - Fabric (~> 1.10.1)
+  - Fabric (1.10.1)
+  - Firebase/Analytics (5.13.0):
+    - Firebase/Core
   - Firebase/Auth (5.13.0):
     - Firebase/CoreOnly
     - FirebaseAuth (= 5.0.5)
@@ -113,6 +118,9 @@ PODS:
   - SwiftyJSON (4.2.0)
 
 DEPENDENCIES:
+  - Crashlytics (~> 3.13.1)
+  - Fabric (~> 1.10.1)
+  - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Firestore
@@ -124,6 +132,8 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - BoringSSL
+    - Crashlytics
+    - Fabric
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -147,6 +157,8 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   BoringSSL: e10f92a27043805c01071fe815a5cd98ae8212e7
+  Crashlytics: 5aa8e90dcbf2f34898b4f5a0037787531246cca0
+  Fabric: f6f21452846788bb44595d73e9909d79d328e617
   Firebase: 6df9a6114bc9f106a98fe83d5438d4d9833c2019
   FirebaseAnalytics: 63202d2665de4e6adcbdce189135255d8b5962ba
   FirebaseAuth: 9299ab178271bec7426967b05b2718bb6fc31f17
@@ -168,6 +180,6 @@ SPEC CHECKSUMS:
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: 6381e7e3359ae47c5ae5ead75b5db21c93ec0f9b
+PODFILE CHECKSUM: ce90c54350a82ef93dee93e92a51e8948f6dc947
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.7.1

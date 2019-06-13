@@ -48,16 +48,12 @@ class LogInViewController: UIViewController, UITextFieldDelegate  {
             Auth.auth().signIn(withEmail: email, password: password, completion: { (user, error) in
                 
                 if let error = error {
-                    print("ERROR: Failed top sign in user.")
-                    print(error)
-                } else {
-                    //Force CurrentUser to update.
-                    if(CurrentUser.constructed) {
-                        CurrentUser.currentUser.updateUser()
-                    }
-                    print("User: " + CurrentUser.currentUser.getFirstName())
-                    self.performSegue(withIdentifier: "logIn", sender: self)
+                    return Log.e(eventType: LogEvent.authentication, message: error.localizedDescription)
                 }
+                CurrentUser.login()
+                print("User: " + CurrentUser.getCurrentUser().getFirstName())
+                Log.i(message: "User" + CurrentUser.getCurrentUser().getFullName())
+                self.performSegue(withIdentifier: "logIn", sender: self)
             })
             
         } else {

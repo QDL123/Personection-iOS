@@ -10,6 +10,9 @@ target 'Personection' do
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
+  pod 'Fabric', '~> 1.10.1'
+  pod 'Crashlytics', '~> 3.13.1'
+  pod 'Firebase/Analytics'
 
   #ALGOLIA
   pod 'InstantSearchClient', '~> 6.0'

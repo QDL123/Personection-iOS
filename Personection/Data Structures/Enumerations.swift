@@ -11,3 +11,9 @@ import Foundation
 enum UserRelation {
     case none, friend, requestSent, requestReceived, undetermined
 }
+
+enum LogEvent {
+    case nullCurrentUser, authentication, download
+}
+
+

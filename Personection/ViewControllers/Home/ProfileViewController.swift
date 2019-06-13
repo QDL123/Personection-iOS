@@ -24,10 +24,10 @@ class ProfileViewController: UIViewController {
     }
     
     func setUpUI() {
-        let currentUser = CurrentUser.currentUser
+        let currentUser = CurrentUser.getCurrentUser()
         let name = currentUser.getFirstName() + " " + currentUser.getLastName()
         print("NAME: " + name)
-        let realUser = CurrentUser.currentUser
+        let realUser = CurrentUser.getCurrentUser()
         let realName = realUser.getFirstName() + " " + realUser.getLastName()
         print("REAL NAME: " + realName)
         self.navigationItem.title = realName

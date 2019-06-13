@@ -97,8 +97,8 @@ class UserProfileViewController: UIViewController, RelationDelegate {
         
         //Add user to current user's friends
         db.collection("users").document(currentUser).collection("friends").document(id).setData([
-            "firstName":CurrentUser.currentUser.getFirstName(),
-            "lastName":CurrentUser.currentUser.getLastName()
+            "firstName":CurrentUser.getCurrentUser().getFirstName(),
+            "lastName":CurrentUser.getCurrentUser().getLastName()
             
         ]) { err in
             if let err = err {
@@ -111,8 +111,8 @@ class UserProfileViewController: UIViewController, RelationDelegate {
         
         //Add current user to user's friends
         db.collection("users").document(id).collection("friends").document(currentUser).setData([
-            "firstName":CurrentUser.currentUser.getFirstName(),
-            "lastName":CurrentUser.currentUser.getLastName()
+            "firstName":CurrentUser.getCurrentUser().getFirstName(),
+            "lastName":CurrentUser.getCurrentUser().getLastName()
             
         ]) { err in
             if let err = err {
@@ -140,8 +140,8 @@ class UserProfileViewController: UIViewController, RelationDelegate {
         let timeStamp = Date().timeIntervalSince1970
         db.collection("users").document(id).collection("friendRequests").document(currentUser).setData([
             "timeStamp":timeStamp,
-            "firstName":CurrentUser.currentUser.getFirstName(),
-            "lastName":CurrentUser.currentUser.getLastName()
+            "firstName":CurrentUser.getCurrentUser().getFirstName(),
+            "lastName":CurrentUser.getCurrentUser().getLastName()
             
         ]) { err in
             if let err = err {
