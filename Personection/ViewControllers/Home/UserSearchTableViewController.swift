@@ -10,48 +10,105 @@ import UIKit
 import InstantSearch
 import Firebase
 
-class UserSearchTableViewController: HitsTableViewController, UISearchBarDelegate {
+class UserSearchTableViewController: UIViewController, HitsTableViewDataSource, HitsTableViewDelegate, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+    
+    //Suggesstions table delegate methods
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return suggestions.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "suggestionCell") as! UITableViewCell
+        cell.textLabel?.text = suggestions[indexPath.row].getFullName()
+        return cell
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "People you might know"
+    }
     
     let client = Client(appID: "DMRC05KK1I", apiKey: "54efdbade3ca6966c12b855166f6bbde")
     
     var searching: Bool = false
     
+    var suggestions = [User]()
+    
+    
     //Mark: IBOutlet Connections
     @IBOutlet weak var tableView: HitsTableWidget!
-    
     @IBOutlet weak var searchBarWidget: SearchBarWidget!
+    
+    
+    var searchViewModel: SearchViewModel!
+    var hitsController: HitsController!
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        hitsTableView = tableView
+        hitsController = HitsController(table: tableView)
+        //tableView.dataSource = hitsController
+        //tableView.delegate = hitsController
+        hitsController.tableDataSource = self
+        hitsController.tableDelegate = self
         
+        tableView.dataSource = self
+        tableView.delegate = self
         
-        //The search widget delegate has to be assigned to the internal instant search infrastructure so
-        //there's no way to get hooks into the search bar events.
-        //searchBarWidget.delegate = self
+        searchViewModel = SearchViewModel(view: searchBarWidget)
+        InstantSearch.shared.register(viewModel: searchViewModel)
+        searchBarWidget.delegate = self
+        searchBarWidget.placeholder = "Search for users..."
         
+        //Initialize suggestions
+        suggestions.append(User(firstName: "Timo", lastName: "Meier", id: "meierID"))
+        suggestions.append(User(firstName: "Tomas", lastName: "Hertl", id: "HertlID"))
+        tableView.reloadData()
     
         // Register all widgets in view to InstantSearch
         InstantSearch.shared.registerAllWidgets(in: self.view)
-        //Crashlytics.sharedInstance().crash()
-
     }
     
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        //Check if the search bar is empty
-        if(searching && searchText.count == 0) {
-            //Switch to not searching
+        if(searchText.count == 0) {
             searching = false
-        } else if(!searching && searchText.count == 1) {
+            tableView.dataSource = self
+            tableView.delegate = self
+            tableView.reloadData()
+        } else if(searchText.count > 0) {
             searching = true
+            tableView.dataSource = hitsController
+            tableView.delegate = hitsController
+            searchViewModel.search(query: searchText)
         }
+    }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searching = false
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.reloadData()
     }
     
     // ViewController.swift
     //Mark: TableView Delegate Functions
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, containing hit: [String : Any]) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath, containing hit: [String : Any]) {
+        //performSegue(withIdentifier: "toUserDetail", sender: self)
+    }
+    
+    func viewForNoResults(in tableView: UITableView) -> UIView {
+        // Specify a View when no results are returned from Algolia
+        if(!searching) {
+            return UIView()
+        }
+        return NoResultsView()
+    }
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath, containing hit: [String : Any]) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "hitCell", for: indexPath) as! HitCell
         
@@ -117,5 +174,44 @@ class UserSearchTableViewController: HitsTableViewController, UISearchBarDelegat
                 destination?.setUser(user: user)
             }
         }
+    }
+}
+
+class NoResultsView: UIView {
+    
+    var shouldSetUpConstraints = true
+    
+    let label: UILabel = {
+        let l = UILabel()
+        l.text = "No Results"
+        l.font = l.font.withSize(21)
+        l.textAlignment = NSTextAlignment.center
+        return l
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override func updateConstraints() {
+        if(shouldSetUpConstraints) {
+            setUpConstraints()
+        }
+        super.updateConstraints()
+    }
+    
+    func setUpConstraints() {
+        self.addSubview(label)
+        label.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        label.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        label.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
+        label.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        
+        shouldSetUpConstraints = false
     }
 }

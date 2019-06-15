@@ -213,17 +213,8 @@
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SS6-97-mgf" customClass="StatsLabelWidget" customModule="InstantSearch">
-                                <rect key="frame" x="16" y="120" width="343" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="Vi1-7R-DmN"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wDC-YW-ZJV" customClass="HitsTableWidget" customModule="InstantSearch">
-                                <rect key="frame" x="0.0" y="155" width="375" height="463"/>
+                                <rect key="frame" x="0.0" y="120" width="375" height="498"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="hitCell" id="Rj7-NP-93y" customClass="HitCell" customModule="Personection" customModuleProvider="target">
@@ -237,6 +228,14 @@
                                             <segue destination="5on-dZ-B10" kind="show" identifier="toUserDetail" id="Eg7-7O-835"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="suggestionCell" id="J8p-GG-qmH" customClass="HitCell" customModule="Personection" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="J8p-GG-qmH" id="Fno-rU-3t2">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
@@ -245,13 +244,10 @@
                             <constraint firstItem="wDC-YW-ZJV" firstAttribute="leading" secondItem="Njg-eJ-U1X" secondAttribute="leading" id="3B8-Aj-mu7"/>
                             <constraint firstItem="lKm-9Q-eB7" firstAttribute="top" secondItem="Njg-eJ-U1X" secondAttribute="top" id="5V9-5Q-cpL"/>
                             <constraint firstItem="wDC-YW-ZJV" firstAttribute="trailing" secondItem="Njg-eJ-U1X" secondAttribute="trailing" id="CjY-6W-ANl"/>
-                            <constraint firstItem="SS6-97-mgf" firstAttribute="top" secondItem="lKm-9Q-eB7" secondAttribute="bottom" id="L2f-Dy-41w"/>
                             <constraint firstItem="lKm-9Q-eB7" firstAttribute="trailing" secondItem="Njg-eJ-U1X" secondAttribute="trailing" id="LP4-yH-tuF"/>
-                            <constraint firstItem="Njg-eJ-U1X" firstAttribute="trailing" secondItem="SS6-97-mgf" secondAttribute="trailing" constant="16" id="Mjp-k0-CCn"/>
                             <constraint firstItem="lKm-9Q-eB7" firstAttribute="leading" secondItem="Njg-eJ-U1X" secondAttribute="leading" id="ZZr-L6-vfP"/>
                             <constraint firstItem="wDC-YW-ZJV" firstAttribute="bottom" secondItem="Njg-eJ-U1X" secondAttribute="bottom" id="hpW-fc-5hF"/>
-                            <constraint firstItem="wDC-YW-ZJV" firstAttribute="top" secondItem="lKm-9Q-eB7" secondAttribute="bottom" constant="35" id="nF7-jP-QV0"/>
-                            <constraint firstItem="SS6-97-mgf" firstAttribute="leading" secondItem="Njg-eJ-U1X" secondAttribute="leading" constant="16" id="xus-pn-Vcz"/>
+                            <constraint firstItem="wDC-YW-ZJV" firstAttribute="top" secondItem="lKm-9Q-eB7" secondAttribute="bottom" id="nF7-jP-QV0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Njg-eJ-U1X"/>
                     </view>
