@@ -14,10 +14,11 @@ var themeColor:UIColor?
 struct Globals {
     //Database strings
     static let usersPath = "users"
-    static let requestsPath = "requests"
+    static let plansPath = "plans"
     static let friendsPath = "friends"
     static let startTimePath = "startTime"
-    static let endTimePath = "endTimePath"
+    static let endTimePath = "endTime"
+    static let membersPath = "members"
     
 }
 

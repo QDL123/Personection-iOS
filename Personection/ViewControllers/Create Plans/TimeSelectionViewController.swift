@@ -158,10 +158,29 @@ class TimeSelectionViewController: UIViewController, TimePickerControllerDelegat
     @objc func handleMakePlans() {
         let uid = Auth.auth().currentUser?.uid
         let db = Firestore.firestore()
-        db.collection(Globals.usersPath).document(uid!).collection(Globals.requestsPath).addDocument(data: [
-            Globals.startTimePath: self.startTime?.timeIntervalSince1970 as Any,
-            Globals.endTimePath: self.endTime?.timeIntervalSince1970 as Any
-            ])
+        
+        guard let start = self.startTime else {
+            return Log.e(eventType: LogEvent.null, message: "startTime is null while attempting to send plans request.")
+        }
+        
+        guard let end = self.endTime else {
+            return Log.e(eventType: LogEvent.null, message: "endTime is null while attempting to send plans request.")
+        }
+        var ref: DocumentReference? = nil
+        ref = db.collection(Globals.usersPath).document(uid!).collection(Globals.plansPath).addDocument(data: [
+            Globals.startTimePath: Double(start.timeIntervalSince1970),
+            Globals.endTimePath: Double(end.timeIntervalSince1970),
+            Globals.membersPath: [CurrentUser.getCurrentUser().getID()],
+        ]) { err in
+            if let err = err {
+                print(err);
+            } else {
+                ref?.collection(Globals.membersPath).document(CurrentUser.getCurrentUser().getID()).setData([
+                    "firstName": CurrentUser.getCurrentUser().getFirstName(),
+                    "lastName": CurrentUser.getCurrentUser().getLastName()
+                ])
+            }
+        }
         self.dismiss(animated: true, completion: nil)
     }
     

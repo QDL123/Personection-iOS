@@ -1,60 +1,49 @@
-//makePlans.js
-//import * as functions from 'firebase-functions';
-//import * as admin from 'firebase-admin';
+// makePlans.js
+
+// require needed modules
 const functions = require('firebase-functions');
-var admin = require('firebase-admin');
+const admin = require('firebase-admin');
+admin.initializeApp();
 
 exports.handler = ((snap, context) => {
-    //Show functions has been called
-    console.log("Make Plans!");
+    // rename console.log to log
+    const { log } = console; 
 
-    //admin.initializeApp();
+    // set the version number and log it
+    const version = 1.3;
+    log(version);
 
-    //Code from warning message
-    const settings = {timestampsInSnapshots: true};
-    /*
-    const firestore = new Firestore();
-    firestore.settings(settings);
-    
-    */
-    //Code from tutorial for setting up admin
-    
-    admin.initializeApp(functions.config().firebase);
+    // configure the admin sdk and set up a database reference
     const db = admin.firestore();
-    db.settings(settings);
+
+    // grab the snapshot data
+    const start = snap.data().startTime;
+    const end = snap.data().endTime;
+    const user = context.params.userID;
     
+    if(start && end) {
+        log(`start: ${start}, end: ${end}`);
+        // const friendsPath = db.collection('users').document(user).collection('friends');
 
-    //Get necessary data from context and snapshot
-    const userID = context.params.userID;
-    const startTime = snap.data().startTime;
-    const endTime = snap.data().endTime;
+        // wait to compile the list of friends
+        const friendsList = await db.collection('users').document(user).collection('friends').listDocuments();
 
-    //Loop thorugh all the friends requests and check for overlaps.
-    //Select for greatest overlap
-    var greatestOverlap = 0;
-    //There may be an argument to move requests to its own outermost collection here
-    var idealFriendID = "";
-    var idealRequestID = "";
-    //Get the Users friends
-    console.log("Updated");
-    const friendsRef = snap.ref.parent.parent.collection('friends');
-    return friendsRef.get().then(friendsSnap => {
-        return friendsSnap.forEach(friendDoc => {
-            //For each friend doc get all their requests.
-            //First get their user id
-            const friendID = friendDoc.id;
-            console.log(friendID);
-            
-            return db.collection('users').document(friendID).collection('requests')
-            .get().then(requestsSnap => {
-                //Get each individual document
-                return requestsSnap.forEach(requestDoc => {
-                    //Now we have each request
-                    const request = requestDoc.data();
-                    console.log("Start time: " + request.startTime);
-                    return 0;
-                });
-            });
+        /* This brings up the age old question where should plan requests be stored.
+        Does it need to be under the user? Do they need to access their own requests?
+        Friends definitely need access to locate active plans. Clearly more work on the
+        algorithm is needed to understand the problem. How is the client tracking the 
+        plan creation process?
+        */
+
+        log('friendIds:')
+        const requests = friendsList.map(friendRef => {
+            const friendID = friendRef.data().objectID;
+            log(friendID);
+            return friendID;
         });
-    });
+
+
+    } else {
+        log(`ERROR: Missing either start of end time`);
+    }
 })

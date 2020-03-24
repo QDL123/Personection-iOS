@@ -13,7 +13,7 @@ enum UserRelation {
 }
 
 enum LogEvent {
-    case nullCurrentUser, authentication, download
+    case nullCurrentUser, authentication, download, null
 }
 
 

@@ -80,4 +80,11 @@ class CurrentUser: User {
             }
         }
     }
+    
+    func downloadHomeInfo() {
+        //List of things to potentially download with the load screen up
+        //Current user information //(update user method) (name, id, profile pic) etc.
+        //Suggested friends list
+        //Plans
+    }
 }
